@@ -49,7 +49,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int myIndex = 2; // Mặc định là Home
 
-  final List<Widget> screens = [
+  final List<Widget> screens = const [
     SearchScreen(),
     FavoriteScreen(),
     HomeContentScreen(),
@@ -64,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: CurvedNavigationBar(
         index: myIndex,
         backgroundColor: Colors.white,
-        color: Color.fromARGB(255, 167, 169, 212),
+        color: const Color.fromARGB(255, 167, 169, 212),
         items: const <Widget>[
           Icon(Icons.search, size: 30, color: Colors.white),
           Icon(Icons.favorite, size: 30, color: Colors.white),
