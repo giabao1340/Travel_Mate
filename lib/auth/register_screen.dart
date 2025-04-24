@@ -22,7 +22,7 @@ class RegisterScreen extends StatelessWidget {
           //mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const SizedBox(height: 30),
+            const SizedBox(height: 10),
             const Text(
               'Đăng ký tài khoản mới',
               style: TextStyle(
@@ -77,27 +77,10 @@ class RegisterScreen extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: const Text('Đăng Ký Thành Công'),
-                      content: const Text('Bạn đã đăng ký thành công!'),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop(); // Đóng hộp thoại
-                            Navigator.pushNamed(
-                              context,
-                              '/login',
-                            ); // Điều hướng đến trang đăng nhập
-                          },
-                          child: const Text('Chyển đến Đăng Nhập'),
-                        ),
-                      ],
-                    );
-                  },
-                );
+                Navigator.pushNamed(
+                  context,
+                  '/login',
+                ); // Điều hướng đến trang chủ
                 // Thêm logic đăng ký ở đây, ví dụ: gọi API để đăng ký người dùng
               },
               child: const Text(
@@ -108,12 +91,13 @@ class RegisterScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             const Text(
               'Đăng Nhập Bằng',
               style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
               textAlign: TextAlign.center,
             ),
+            const SizedBox(height: 10),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 255, 255, 255),
