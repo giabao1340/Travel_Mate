@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:dynamic_tabbar/dynamic_tabbar.dart';
 
 class HomeContentScreen extends StatefulWidget {
   const HomeContentScreen({super.key});
@@ -20,21 +19,11 @@ class _HomeContentScreenState extends State<HomeContentScreen>
     'Địa điểm yêu thích',
   ];
   var userName = 'Gia Bảo';
-  List<TabData> tabs = [];
-
+  var userLocation = 'Quận 10, TP.HCM';
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: category.length, vsync: this);
-    for (int i = 0; i < category.length; i++) {
-      tabs.add(
-        TabData(
-          index: i,
-          title: Tab(child: Text(category[i])),
-          content: Center(child: Text('Content for ${category[i]}')),
-        ),
-      );
-    }
   }
 
   @override
@@ -49,6 +38,7 @@ class _HomeContentScreenState extends State<HomeContentScreen>
       child: Scaffold(
         body: Column(
           children: [
+            // Header cố định
             Container(
               alignment: Alignment.topCenter,
               decoration: BoxDecoration(
@@ -60,7 +50,6 @@ class _HomeContentScreenState extends State<HomeContentScreen>
               padding: EdgeInsets.all(10),
               width: double.infinity,
               height: 100,
-
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -86,7 +75,7 @@ class _HomeContentScreenState extends State<HomeContentScreen>
                           ),
                           SizedBox(width: 5),
                           Text(
-                            "Quận 10, TP.HCM",
+                            userLocation,
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
@@ -103,7 +92,7 @@ class _HomeContentScreenState extends State<HomeContentScreen>
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
                       border: Border.all(
-                        color: const Color.fromARGB(255, 190, 190, 190),
+                        color: const Color.fromARGB(255, 255, 255, 255),
                         width: 1,
                       ),
                     ),
@@ -116,57 +105,20 @@ class _HomeContentScreenState extends State<HomeContentScreen>
                 ],
               ),
             ),
-            SizedBox(height: 20),
+
+            // TabBar
             Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 15.0,
-                horizontal: 20,
-              ),
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 25),
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 249, 252, 255),
-                  // border: Border.all(
-                  //   color: const Color.fromARGB(255, 209, 209, 209),
-                  //   width: 1,
-                  // ),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Color.fromARGB(255, 234, 234, 234),
-                      blurRadius: 5,
-                      offset: Offset(0, 3),
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(24),
-                ),
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'Search',
-                    hintStyle: TextStyle(
-                      color: const Color.fromARGB(255, 0, 0, 0),
-                      fontSize: 16,
-                    ),
-                    prefixIcon: Icon(
-                      Icons.search,
-                      color: const Color(0xFFF65959),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
+              padding: const EdgeInsets.all(16),
               child: TabBar(
+                tabAlignment: TabAlignment.center,
                 controller: _tabController,
                 isScrollable: true,
-                labelColor: const Color.fromARGB(255, 141, 137, 245),
-                unselectedLabelColor: Colors.black,
-                indicatorColor: const Color.fromARGB(255, 146, 128, 244),
+                labelColor: Color.fromARGB(255, 144, 147, 205),
+                unselectedLabelColor: const Color.fromARGB(255, 169, 169, 169),
+                indicatorColor: Color.fromARGB(255, 144, 147, 205),
                 indicatorWeight: 3,
-                padding: EdgeInsets.zero, // Không thêm padding ngoài
+                padding: EdgeInsets.zero,
                 labelPadding: EdgeInsets.only(left: 0, right: 40),
-                // indicatorPadding: EdgeInsets.only(left: 0, right: 40),
                 labelStyle: GoogleFonts.poppins(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
@@ -181,36 +133,60 @@ class _HomeContentScreenState extends State<HomeContentScreen>
                 ],
               ),
             ),
+
+            // TabBarView
+            Expanded(
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  for (int i = 0; i < category.length; i++)
+                    buildTabContent(category[i]),
+                ],
+              ),
+            ),
           ],
         ),
-        // bottomNavigationBar: CurvedNavigationBar(
-        //   backgroundColor: Colors.white,
-        //   color: Color.fromARGB(255, 167, 169, 212),
-        //   index: 2,
-        //   items: [
-        //     Icon(Icons.search, size: 30, color: Colors.white),
-        //     Icon(Icons.favorite, size: 30, color: Colors.white),
-        //     Icon(Icons.home, size: 30, color: Colors.white),
-        //     Icon(Icons.list, size: 30, color: Colors.white),
-        //     Icon(Icons.person, size: 30, color: Colors.white),
-        //   ],
+      ),
+    );
+  }
 
-        //   onTap: (index) {
-        //     // Handle navigation based on the index
-        //     if (index == 1) {
-        //       Navigator.pushNamed(context, '/favoritescreen');
-        //     }
-        //     // else if (index == 1) {
-        //     //   Navigator.pushNamed(context, '/home');
-        //     // } else if (index == 2) {
-        //     //   Navigator.pushNamed(context, '/introscreen');
-        //     // } else if (index == 3) {
-        //     //   Navigator.pushNamed(context, '/register');
-        //     // } else if (index == 4) {
-        //     //   Navigator.pushNamed(context, '/login');
-        //     // }
-        //   },
-        // ),
+  Widget buildTabContent(String title) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  title,
+                  style: GoogleFonts.montserrat(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    'Xem tất cả',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xFF176FF2),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Text(
+              'Nội dung cho tab "$title"',
+              style: const TextStyle(fontSize: 16),
+            ),
+          ],
+        ),
       ),
     );
   }
