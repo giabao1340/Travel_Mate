@@ -105,31 +105,70 @@ class _HomeContentScreenState extends State<HomeContentScreen>
                 ],
               ),
             ),
-
-            // TabBar
             Padding(
               padding: const EdgeInsets.all(16),
-              child: TabBar(
-                tabAlignment: TabAlignment.center,
-                controller: _tabController,
-                isScrollable: true,
-                labelColor: Color.fromARGB(255, 144, 147, 205),
-                unselectedLabelColor: const Color.fromARGB(255, 169, 169, 169),
-                indicatorColor: Color.fromARGB(255, 144, 147, 205),
-                indicatorWeight: 3,
-                padding: EdgeInsets.zero,
-                labelPadding: EdgeInsets.only(left: 0, right: 40),
-                labelStyle: GoogleFonts.poppins(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-                unselectedLabelStyle: GoogleFonts.poppins(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-                tabs: [
-                  for (int i = 0; i < category.length; i++)
-                    Tab(child: Text(category[i])),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: 50,
+                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 25),
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 249, 252, 255),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Color.fromARGB(255, 234, 234, 234),
+                          blurRadius: 5,
+                          offset: Offset(0, 3),
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Search',
+                        hintStyle: TextStyle(
+                          color: const Color.fromARGB(255, 0, 0, 0),
+                          fontSize: 16,
+                        ),
+                        prefixIcon: Icon(
+                          Icons.search,
+                          color: const Color(0xFFF65959),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 16), // khoảng cách giữa ô search và tab bar
+                  TabBar(
+                    tabAlignment: TabAlignment.center,
+                    controller: _tabController,
+                    isScrollable: true,
+                    labelColor: Color.fromARGB(255, 144, 147, 205),
+                    unselectedLabelColor: const Color.fromARGB(
+                      255,
+                      169,
+                      169,
+                      169,
+                    ),
+                    indicatorColor: Color.fromARGB(255, 144, 147, 205),
+                    indicatorWeight: 3,
+                    padding: EdgeInsets.zero,
+                    labelPadding: EdgeInsets.only(left: 0, right: 40),
+                    labelStyle: GoogleFonts.poppins(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    unselectedLabelStyle: GoogleFonts.poppins(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    tabs: [
+                      for (int i = 0; i < category.length; i++)
+                        Tab(child: Text(category[i])), // Sửa lại I thành i
+                    ],
+                  ),
                 ],
               ),
             ),
