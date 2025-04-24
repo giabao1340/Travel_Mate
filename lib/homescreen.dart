@@ -1,8 +1,46 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  static var category = [
+    'Phổ biến nhất',
+    'Địa điểm gần bạn',
+    'Địa điểm mới',
+    'Địa điểm nổi bật',
+    'Địa điểm yêu thích',
+  ];
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Kiểm tra danh sách category trước khi khởi tạo TabController
+    if (HomeScreen.category.isNotEmpty) {
+      _tabController = TabController(
+        length: HomeScreen.category.length,
+        vsync: this, // Sử dụng `this` làm vsync
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose(); // Hủy TabController khi widget bị unmounted
+    super.dispose();
+  }
+
+  String get title => 'Home';
 
   @override
   Widget build(BuildContext context) {
@@ -81,10 +119,41 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Align(
+                    alignment: Alignment.topLeft, // Căn TabBar sát lề trái
+                    child: TabBar(
+                      controller: _tabController,
+                      isScrollable: true, // Cho phép TabBar cuộn
+                      labelColor: Color.fromARGB(255, 144, 147, 205),
+                      unselectedLabelColor: Color(0xFFB8B8B8),
+                      labelStyle: GoogleFonts.robotoCondensed(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      unselectedLabelStyle: GoogleFonts.robotoCondensed(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      indicatorColor: Color.fromARGB(255, 167, 169, 212),
+                      tabs: [
+                        Tab(
+                          text: 'Địa điểm gần bạn',
+                        ),
+                        Tab(
+                          text: 'Địa điểm mới',
+                        ),
+                        Tab(
+                          text: 'Địa điểm nổi bật',
+                        ),
+                        // for (int i = 1; i < HomeScreen.category.length; i++)
+                        //   Tab(text: HomeScreen.category[i]),
+                      ],
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       vertical: 15.0,
-                      horizontal: 20,
+                      // horizontal: 20,
                     ),
                     child: Container(
                       padding: EdgeInsets.symmetric(
@@ -115,78 +184,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
-                  Container(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      'Discover the world',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  SizedBox(
-                    height: 200,
-                    child: ListView.builder(
-                      itemCount: 6,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (BuildContext context, int index) {
-                        return InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(context, '/details');
-                          },
-                          child: Container(
-                            width: 160,
-                            padding: EdgeInsets.all(20),
-                            margin: EdgeInsets.only(left: 15),
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 0, 0, 0),
-                              borderRadius: BorderRadius.circular(15),
-                              image: DecorationImage(
-                                image: AssetImage(
-                                  'assets/city${index + 1}.jpg',
-                                ),
-                                fit: BoxFit.cover,
-                                opacity: 0.7,
-                              ),
-                            ),
-                            child: Column(
-                              children: [
-                                Container(
-                                  alignment: Alignment.topRight,
-                                  child: Icon(
-                                    Icons.bookmark_border_outlined,
-                                    color: const Color.fromARGB(
-                                      255,
-                                      255,
-                                      255,
-                                      255,
-                                    ),
-                                    size: 30,
-                                  ),
-                                ),
-                                Spacer(),
-                                Container(
-                                  alignment: Alignment.bottomLeft,
-                                  child: Text(
-                                    'City ${index + 1}',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 10),
                 ],
               ),
             ),
@@ -198,6 +196,7 @@ class HomeScreen extends StatelessWidget {
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.white,
         color: Color.fromARGB(255, 167, 169, 212),
+        index: 2,
         items: [
           Icon(Icons.search, size: 30, color: Colors.white),
           Icon(Icons.favorite, size: 30, color: Colors.white),
@@ -209,3 +208,64 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+
+// SizedBox(
+//                     height: 200,
+//                     child: ListView.builder(
+//                       itemCount: 6,
+//                       scrollDirection: Axis.horizontal,
+//                       itemBuilder: (BuildContext context, int index) {
+//                         return InkWell(
+//                           onTap: () {
+//                             Navigator.pushNamed(context, '/details');
+//                           },
+//                           child: Container(
+//                             width: 160,
+//                             padding: EdgeInsets.all(20),
+//                             margin: EdgeInsets.only(right: 15),
+//                             decoration: BoxDecoration(
+//                               color: const Color.fromARGB(255, 0, 0, 0),
+//                               borderRadius: BorderRadius.circular(15),
+//                               image: DecorationImage(
+//                                 image: AssetImage(
+//                                   'assets/city${index + 1}.jpg',
+//                                 ),
+//                                 fit: BoxFit.cover,
+//                                 opacity: 0.7,
+//                               ),
+//                             ),
+//                             child: Column(
+//                               children: [
+//                                 Container(
+//                                   alignment: Alignment.topRight,
+//                                   child: Icon(
+//                                     Icons.bookmark_border_outlined,
+//                                     color: const Color.fromARGB(
+//                                       255,
+//                                       255,
+//                                       255,
+//                                       255,
+//                                     ),
+//                                     size: 30,
+//                                   ),
+//                                 ),
+//                                 Spacer(),
+//                                 Container(
+//                                   alignment: Alignment.bottomLeft,
+//                                   child: Text(
+//                                     'City ${index + 1}',
+//                                     style: TextStyle(
+//                                       color: Colors.white,
+//                                       fontSize: 18,
+//                                       fontWeight: FontWeight.w600,
+//                                     ),
+//                                   ),
+//                                 ),
+//                               ],
+//                             ),
+//                           ),
+//                         );
+//                       },
+//                     ),
+//                   ),

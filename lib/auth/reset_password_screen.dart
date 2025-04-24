@@ -60,28 +60,9 @@ class ResetPasswordScreen extends StatelessWidget {
               ),
               onPressed: () {
                 // Handle password reset logic here
-                Navigator.pushNamed(context, '/login');
-                                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: const Text('Đổi mật khẩu thành công'),
-                      content: const Text('Bạn đã đổi mật khẩu thành công!'),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop(); // Đóng hộp thoại
-                            Navigator.pushNamed(
-                              context,
-                              '/login',
-                            ); // Điều hướng đến trang đăng nhập
-                          },
-                          child: const Text('Chyển đến Đăng Nhập'),
-                        ),
-                      ],
-                    );
-                  },
-                );
+                // Navigator.pushNamed(context, '/login');
+                // For example, you can navigate to the login screen after resetting the password
+                Navigator.pushReplacementNamed(context, '/login');
               },
               child: const Text('Đặt lại mật khẩu', 
                   style: TextStyle(

@@ -19,20 +19,20 @@ class LoginScreen extends StatelessWidget {
         ),
         padding: const EdgeInsets.all(15.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // const SizedBox(height: 100),
+            const SizedBox(height: 50),
             const Text(
               'Chào mừng bạn đến với Travel Mate!',
               style: TextStyle(
-                fontSize: 28,
+                fontSize: 32,
                 fontWeight: FontWeight.bold,
                 color: Color.fromARGB(255, 128, 120, 218),
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 16),
             TextField(
               decoration: InputDecoration(
                 labelText: 'Email',
@@ -50,7 +50,7 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 16),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 255, 255, 255),
@@ -73,12 +73,13 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 16),
             const Text(
               'Đăng Nhập Bằng',
               style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
               textAlign: TextAlign.center,
             ),
+            // const SizedBox(height: 5),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 255, 255, 255),
@@ -113,7 +114,7 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 10),
+            const SizedBox(height: 16),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 255, 255, 255),
@@ -147,7 +148,7 @@ class LoginScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 10),
+            // const SizedBox(height: 16),
             TextButton(
               onPressed: () {
                 // Thêm logic quên mật khẩu ở đây
@@ -160,6 +161,7 @@ class LoginScreen extends StatelessWidget {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Text('Bạn chưa có tài khoản?'),
                 TextButton(
@@ -174,6 +176,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ],
             ),
+            // const SizedBox(height: 25.6),
           ],
         ),
       ),
