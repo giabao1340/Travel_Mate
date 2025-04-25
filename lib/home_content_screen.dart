@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:travel_mate/popular_item.dart';
 
 class HomeContentScreen extends StatefulWidget {
   const HomeContentScreen({super.key});
@@ -172,8 +173,7 @@ class _HomeContentScreenState extends State<HomeContentScreen>
                 ],
               ),
             ),
-
-            // TabBarView
+            SizedBox(height: 20), // TabBarView
             Expanded(
               child: TabBarView(
                 controller: _tabController,
@@ -190,39 +190,70 @@ class _HomeContentScreenState extends State<HomeContentScreen>
   }
 
   Widget buildTabContent(String title) {
-    return Padding(
+    return Padding (
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  title,
-                  style: GoogleFonts.montserrat(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
+                //Đổn dữ liệu vào
+                ...List.generate(
+                  category.length,
+                  (i) => PopularItem(
+                    imageUrl:
+                        'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDF8fHRyaXZpYWxlfGVufDB8fHx8MTY5MjQ1NTY3Ng&ixlib=rb-4.0.3&q=80&w=400',
+                    title: 'Hà Giang',
+                    rating: 4.5,
+                    location: 'Hà Giang, Việt Nam',
+                    reviews: 100,
                   ),
                 ),
-                TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    'Xem tất cả',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: Color(0xFF176FF2),
-                    ),
-                  ),
-                ),
+                // PopularItem(
+                //   imageUrl:
+                //       'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDF8fHRyaXZpYWxlfGVufDB8fHx8MTY5MjQ1NTY3Ng&ixlib=rb-4.0.3&q=80&w=400',
+                //   title: 'Đà Lạt',
+                //   rating: 4.5,
+                //   location: 'Đà Lạt, Việt Nam',
+                //   reviews: 120,
+                // ),
+                // PopularItem(
+                //   imageUrl:
+                //       'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDF8fHRyaXZpYWxlfGVufDB8fHx8MTY5MjQ1NTY3Ng&ixlib=rb-4.0.3&q=80&w=400',
+                //   title: 'Đà Nẵng',
+                //   rating: 4.7,
+                //   location: 'Đà Nẵng, Việt Nam',
+                //   reviews: 150,
+                // ),
+                // PopularItem(
+                //   imageUrl:
+                //       'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDF8fHRyaXZpYWxlfGVufDB8fHx8MTY5MjQ1NTY3Ng&ixlib=rb-4.0.3&q=80&w=400',
+                //   title: 'Hà Nội',
+                //   rating: 4.8,
+                //   location: 'Hà Nội, Việt Nam',
+                //   reviews: 200,
+                // ),
+                // PopularItem(
+                //   imageUrl:
+                //       'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDF8fHRyaXZpYWxlfGVufDB8fHx8MTY5MjQ1NTY3Ng&ixlib=rb-4.0.3&q=80&w=400',
+                //   title: 'Nha Trang',
+                //   rating: 4.9,
+                //   location: 'Nha Trang, Việt Nam',
+                //   reviews: 300,
+                // ),
+                // SizedBox(width: 16),
+                // PopularItem(
+                //   imageUrl:
+                //       'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDF8fHRyaXZpYWxlfGVufDB8fHx8MTY5MjQ1NTY3Ng&ixlib=rb-4.0.3&q=80&w=400',
+                //   title: 'Hạ Long',
+                //   rating: 4.6,
+                //   location: 'Hạ Long, Việt Nam',
+                //   reviews: 180,
+                // ),
               ],
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'Nội dung cho tab "$title"',
-              style: const TextStyle(fontSize: 16),
             ),
           ],
         ),
