@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel_mate/auth/header_widget.dart';
 import 'package:travel_mate/introscreen.dart';
 import 'package:travel_mate/lists_creen.dart';
 import 'package:travel_mate/profile_screen.dart';
@@ -13,7 +14,7 @@ import 'auth/reset_password_screen.dart';
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -57,10 +58,20 @@ class _HomeScreenState extends State<HomeScreen> {
     ProfileScreen(),
   ];
 
+  final String userName = 'Gia Bảo';
+  final String userLocation = 'Quận 10, TP.HCM';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(index: myIndex, children: screens),
+      body: Column(
+        children: [
+          // Header
+          HeaderWidget(userName: userName, userLocation: userLocation),
+          // Nội dung bên dưới header
+          Expanded(child: IndexedStack(index: myIndex, children: screens)),
+        ],
+      ),
       bottomNavigationBar: CurvedNavigationBar(
         index: myIndex,
         backgroundColor: Colors.white,
