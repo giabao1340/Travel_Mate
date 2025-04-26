@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class PopularItem extends StatelessWidget {
-  final String imageUrl;
+  final String image;
   final String title;
   final String location;
   final double rating;
@@ -9,7 +9,7 @@ class PopularItem extends StatelessWidget {
 
   const PopularItem({
     super.key,
-    required this.imageUrl,
+    required this.image,
     required this.title,
     required this.location,
     required this.rating,
@@ -21,12 +21,13 @@ class PopularItem extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(right: 10),
       width: 150,
-      height: 230,
+      height: 240,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: Colors.white,
         boxShadow: [
           BoxShadow(
+            // ignore: deprecated_member_use
             color: Colors.grey.withOpacity(0.2),
             spreadRadius: 2,
             blurRadius: 5,
@@ -42,8 +43,8 @@ class PopularItem extends StatelessWidget {
               topLeft: Radius.circular(20),
               topRight: Radius.circular(20),
             ),
-            child: Image.network(
-              imageUrl,
+            child: Image(
+              image: AssetImage(image),
               fit: BoxFit.cover,
               width: double.infinity,
               height: 150,

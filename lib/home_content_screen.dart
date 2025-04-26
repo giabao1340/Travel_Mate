@@ -9,6 +9,22 @@ class HomeContentScreen extends StatefulWidget {
   State<HomeContentScreen> createState() => _HomeContentScreenState();
 }
 
+class LocationItem {
+  final String image;
+  final String title;
+  final String location;
+  final double rating;
+  final int reviews;
+
+  const LocationItem({
+    required this.image,
+    required this.title,
+    required this.location,
+    required this.rating,
+    required this.reviews,
+  });
+}
+
 class _HomeContentScreenState extends State<HomeContentScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
@@ -18,6 +34,50 @@ class _HomeContentScreenState extends State<HomeContentScreen>
     'Địa điểm mới',
     'Địa điểm nổi bật',
     'Địa điểm yêu thích',
+  ];
+  var locationItems = [
+    LocationItem(
+      image: 'assets/city1.jpg',
+      title: 'City 1',
+      location: 'Location 1',
+      rating: 4.5,
+      reviews: 100,
+    ),
+    LocationItem(
+      image: 'assets/city2.jpg',
+      title: 'City 2',
+      location: 'Location 2',
+      rating: 4.0,
+      reviews: 80,
+    ),
+    LocationItem(
+      image: 'assets/city3.jpg',
+      title: 'City 3',
+      location: 'Location 3',
+      rating: 4.8,
+      reviews: 120,
+    ),
+    LocationItem(
+      image: 'assets/city4.jpg',
+      title: 'City 4',
+      location: 'Location 4',
+      rating: 4.2,
+      reviews: 90,
+    ),
+    LocationItem(
+      image: 'assets/city5.jpg',
+      title: 'City 5',
+      location: 'Location 5',
+      rating: 4.7,
+      reviews: 110,
+    ),
+    LocationItem(
+      image: 'assets/city6.jpg',
+      title: 'City 6',
+      location: 'Location 6',
+      rating: 4.3,
+      reviews: 95,
+    ),
   ];
   var userName = 'Gia Bảo';
   var userLocation = 'Quận 10, TP.HCM';
@@ -35,152 +95,140 @@ class _HomeContentScreenState extends State<HomeContentScreen>
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
           children: [
-            // Header cố định
-            Container(
-              alignment: Alignment.topCenter,
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 167, 169, 212),
-                borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(50),
-                ),
-              ),
-              padding: EdgeInsets.all(10),
-              width: double.infinity,
-              height: 100,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '☀️Chào buổi Sáng, $userName',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
+            // Header
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 16, right: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Search box
+                    Container(
+                      width: double.infinity,
+                      height: 50,
+                      padding: EdgeInsets.symmetric(
+                        vertical: 5,
+                        horizontal: 25,
                       ),
-                      SizedBox(height: 10),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.location_on_outlined,
-                            size: 25,
-                            color: Colors.white,
-                          ),
-                          SizedBox(width: 5),
-                          Text(
-                            userLocation,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white,
-                            ),
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 249, 252, 255),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromARGB(255, 234, 234, 234),
+                            blurRadius: 5,
+                            offset: Offset(0, 3),
                           ),
                         ],
+                        borderRadius: BorderRadius.circular(24),
                       ),
-                    ],
-                  ),
-                  Container(
-                    width: 45,
-                    height: 45,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      border: Border.all(
-                        color: const Color.fromARGB(255, 255, 255, 255),
-                        width: 1,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Search',
+                          hintStyle: TextStyle(
+                            color: Color.fromARGB(255, 0, 0, 0),
+                            fontSize: 16,
+                          ),
+                          prefixIcon: Icon(
+                            Icons.search,
+                            color: Color(0xFFF65959),
+                          ),
+                        ),
                       ),
                     ),
-                    child: Icon(
-                      Icons.notifications_none_outlined,
-                      size: 30,
-                      color: Colors.white,
+                    SizedBox(height: 16),
+
+                    // TabBar
+                    TabBar(
+                      tabAlignment: TabAlignment.center,
+                      controller: _tabController,
+                      isScrollable: true,
+                      labelColor: Color.fromARGB(255, 144, 147, 205),
+                      unselectedLabelColor: Color.fromARGB(255, 169, 169, 169),
+                      indicatorColor: Color.fromARGB(255, 144, 147, 205),
+                      indicatorWeight: 3,
+                      labelPadding: EdgeInsets.only(left: 0, right: 40),
+                      labelStyle: GoogleFonts.poppins(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      unselectedLabelStyle: GoogleFonts.poppins(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      tabs: [
+                        for (int i = 0; i < category.length; i++)
+                          Tab(child: Text(category[i])),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: double.infinity,
-                    height: 50,
-                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 25),
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 249, 252, 255),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Color.fromARGB(255, 234, 234, 234),
-                          blurRadius: 5,
-                          offset: Offset(0, 3),
+                    SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Text(
+                          'Địa điểm phổ biến nhất',
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Color.fromARGB(255, 144, 147, 205),
+                          ),
+                        ),
+                        Spacer(),
+                        TextButton(
+                          onPressed: () => {},
+                          child: Text(
+                            'Xem thêm',
+                            style: GoogleFonts.poppins(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: Color.fromARGB(255, 144, 147, 205),
+                            ),
+                          ),
                         ),
                       ],
-                      borderRadius: BorderRadius.circular(24),
                     ),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Search',
-                        hintStyle: TextStyle(
-                          color: const Color.fromARGB(255, 0, 0, 0),
-                          fontSize: 16,
-                        ),
-                        prefixIcon: Icon(
-                          Icons.search,
-                          color: const Color(0xFFF65959),
-                        ),
+                    // TabBarView
+                    Expanded(
+                      child: TabBarView(
+                        controller: _tabController,
+                        physics: BouncingScrollPhysics(),
+                        children: [
+                          for (int i = 0; i < category.length; i++)
+                            buildTabContent(category[i]),
+                        ],
                       ),
                     ),
-                  ),
-                  SizedBox(height: 16), // khoảng cách giữa ô search và tab bar
-                  TabBar(
-                    tabAlignment: TabAlignment.center,
-                    controller: _tabController,
-                    isScrollable: true,
-                    labelColor: Color.fromARGB(255, 144, 147, 205),
-                    unselectedLabelColor: const Color.fromARGB(
-                      255,
-                      169,
-                      169,
-                      169,
+                    SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Text(
+                          'Địa điểm phổ biến nhất',
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Color.fromARGB(255, 144, 147, 205),
+                          ),
+                        ),
+                        Spacer(),
+                        TextButton(
+                          onPressed: () => {},
+                          child: Text(
+                            'Xem thêm',
+                            style: GoogleFonts.poppins(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: Color.fromARGB(255, 144, 147, 205),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    indicatorColor: Color.fromARGB(255, 144, 147, 205),
-                    indicatorWeight: 3,
-                    padding: EdgeInsets.zero,
-                    labelPadding: EdgeInsets.only(left: 0, right: 40),
-                    labelStyle: GoogleFonts.poppins(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    unselectedLabelStyle: GoogleFonts.poppins(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    tabs: [
-                      for (int i = 0; i < category.length; i++)
-                        Tab(child: Text(category[i])), // Sửa lại I thành i
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 20), // TabBarView
-            Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                children: [
-                  for (int i = 0; i < category.length; i++)
-                    buildTabContent(category[i]),
-                ],
+                  ],
+                ),
               ),
             ),
           ],
@@ -190,72 +238,20 @@ class _HomeContentScreenState extends State<HomeContentScreen>
   }
 
   Widget buildTabContent(String title) {
-    return Padding (
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+    return SizedBox(
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
-        child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                //Đổn dữ liệu vào
-                ...List.generate(
-                  category.length,
-                  (i) => PopularItem(
-                    imageUrl:
-                        'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDF8fHRyaXZpYWxlfGVufDB8fHx8MTY5MjQ1NTY3Ng&ixlib=rb-4.0.3&q=80&w=400',
-                    title: 'Hà Giang',
-                    rating: 4.5,
-                    location: 'Hà Giang, Việt Nam',
-                    reviews: 100,
-                  ),
-                ),
-                // PopularItem(
-                //   imageUrl:
-                //       'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDF8fHRyaXZpYWxlfGVufDB8fHx8MTY5MjQ1NTY3Ng&ixlib=rb-4.0.3&q=80&w=400',
-                //   title: 'Đà Lạt',
-                //   rating: 4.5,
-                //   location: 'Đà Lạt, Việt Nam',
-                //   reviews: 120,
-                // ),
-                // PopularItem(
-                //   imageUrl:
-                //       'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDF8fHRyaXZpYWxlfGVufDB8fHx8MTY5MjQ1NTY3Ng&ixlib=rb-4.0.3&q=80&w=400',
-                //   title: 'Đà Nẵng',
-                //   rating: 4.7,
-                //   location: 'Đà Nẵng, Việt Nam',
-                //   reviews: 150,
-                // ),
-                // PopularItem(
-                //   imageUrl:
-                //       'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDF8fHRyaXZpYWxlfGVufDB8fHx8MTY5MjQ1NTY3Ng&ixlib=rb-4.0.3&q=80&w=400',
-                //   title: 'Hà Nội',
-                //   rating: 4.8,
-                //   location: 'Hà Nội, Việt Nam',
-                //   reviews: 200,
-                // ),
-                // PopularItem(
-                //   imageUrl:
-                //       'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDF8fHRyaXZpYWxlfGVufDB8fHx8MTY5MjQ1NTY3Ng&ixlib=rb-4.0.3&q=80&w=400',
-                //   title: 'Nha Trang',
-                //   rating: 4.9,
-                //   location: 'Nha Trang, Việt Nam',
-                //   reviews: 300,
-                // ),
-                // SizedBox(width: 16),
-                // PopularItem(
-                //   imageUrl:
-                //       'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDF8fHRyaXZpYWxlfGVufDB8fHx8MTY5MjQ1NTY3Ng&ixlib=rb-4.0.3&q=80&w=400',
-                //   title: 'Hạ Long',
-                //   rating: 4.6,
-                //   location: 'Hạ Long, Việt Nam',
-                //   reviews: 180,
-                // ),
-              ],
-            ),
-          ],
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: List.generate(6, (index) {
+            return PopularItem(
+              image: locationItems[index].image,
+              title: locationItems[index].title,
+              location: locationItems[index].location,
+              rating: locationItems[index].rating,
+              reviews: locationItems[index].reviews,
+            );
+          }),
         ),
       ),
     );
