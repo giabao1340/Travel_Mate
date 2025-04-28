@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:travel_mate/auth/header_widget.dart';
+import 'package:travel_mate/header_widget.dart';
 import 'package:travel_mate/introscreen.dart';
 import 'package:travel_mate/lists_creen.dart';
 import 'package:travel_mate/profile_screen.dart';
@@ -64,10 +64,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           // Header
-          HeaderWidget(userName: userName, userLocation: userLocation),
+          if (myIndex < 4)
+            HeaderWidget(userName: userName, userLocation: userLocation),
           // Nội dung bên dưới header
           Expanded(child: IndexedStack(index: myIndex, children: screens)),
         ],

@@ -96,6 +96,7 @@ class _HomeContentScreenState extends State<HomeContentScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [

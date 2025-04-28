@@ -7,7 +7,7 @@ class ResetPasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(title: const Text('Đặt lại mật khẩu')),
+      // appBar: AppBar(title: const Text('Đặt lại mật khẩu')),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -52,8 +52,12 @@ class ResetPasswordScreen extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor:
-                    const Color.fromARGB(255, 128, 120, 218), // Change to your desired color
+                backgroundColor: const Color.fromARGB(
+                  255,
+                  128,
+                  120,
+                  218,
+                ), // Change to your desired color
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50),
                 ),
@@ -64,13 +68,14 @@ class ResetPasswordScreen extends StatelessWidget {
                 // For example, you can navigate to the login screen after resetting the password
                 Navigator.pushReplacementNamed(context, '/login');
               },
-              child: const Text('Đặt lại mật khẩu', 
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  )),
-              
+              child: const Text(
+                'Đặt lại mật khẩu',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
             ),
           ],
         ),
