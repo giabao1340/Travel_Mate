@@ -158,11 +158,14 @@ class ProfileOption extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
         elevation: 2,
+        // ignore: deprecated_member_use
         shadowColor: Colors.grey.withOpacity(0.3),
         child: InkWell(
           onTap: onTap,
           borderRadius: BorderRadius.circular(15),
+          // ignore: deprecated_member_use
           splashColor: Theme.of(context).primaryColor.withOpacity(0.2),
+          // ignore: deprecated_member_use
           highlightColor: Colors.grey.withOpacity(0.1),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
