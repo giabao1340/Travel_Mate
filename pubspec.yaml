@@ -14,7 +14,7 @@ dependencies:
   curved_navigation_bar: ^1.0.6
   google_fonts: ^5.0.0 # Use the latest version
   dynamic_tabbar: ^1.0.9
-
+  carousel_slider: ^5.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

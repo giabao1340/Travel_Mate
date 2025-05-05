@@ -6,10 +6,8 @@ class FavoriteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.pink[50],
-      body: Center(
-        child: Text('❤️ Yêu thích', style: TextStyle(fontSize: 24)),
-      ),
+      backgroundColor: Colors.white,
+      body: Center(child: Text('❤️ Yêu thích', style: TextStyle(fontSize: 24))),
     );
   }
 }
