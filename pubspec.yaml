@@ -12,9 +12,37 @@ dependencies:
     sdk: flutter
   flutter_native_splash: ^2.4.6
   curved_navigation_bar: ^1.0.6
-  google_fonts: ^5.0.0 # Use the latest version
+  google_fonts: ^6.2.1 # Use the latest version
   dynamic_tabbar: ^1.0.9
   carousel_slider: ^5.0.0
+
+  firebase_core: ^3.13.1
+  firebase_auth: ^5.5.4         # Xác thực người dùng
+  cloud_firestore: ^5.6.8       # Dữ liệu NoSQL
+  firebase_storage: ^12.4.6      # Lưu file ảnh,...
+  firebase_messaging: ^15.2.6    # Thông báo
+  firebase_analytics: ^11.4.6    # Phân tích dữ liệu
+  # firebase_crashlytics: ^14.4.0  # Báo lỗi
+  # firebase_dynamic_links: ^5.0.0 # Liên kết động
+  # firebase_performance: ^14.4.0  # Theo dõi hiệu suất
+  # firebase_remote_config: ^14.4.0 # Cấu hình từ xa
+  # firebase_app_check: ^14.4.0   # Kiểm tra ứng dụng
+  # firebase_in_app_messaging: ^14.4.0 # Nhắn tin trong ứng dụng
+  # firebase_ml_model_downloader: ^14.4.0 # Tải mô hình ML
+  # firebase_ml_custom: ^14.4.0   # Tùy chỉnh ML
+  # firebase_ml_vision: ^14.4.0   # Nhận diện hình ảnh
+  # firebase_ml_text_recognition: ^14.4.0 # Nhận diện văn bản
+  # firebase_ml_face_detection: ^14.4.0 # Nhận diện khuôn mặt
+  # firebase_ml_barcode_scanning: ^14.4.0 # Quét mã vạch
+  # firebase_ml_image_labeling: ^14.4.0 # Gán nhãn hình ảnh
+  # firebase_ml_object_detection: ^14.4.0 # Nhận diện đối tượng
+  # firebase_ml_language_id: ^14.4.0 # Nhận diện ngôn ngữ
+  # firebase_ml_custom_model: ^14.4.0 # Mô hình tùy chỉnh
+  # firebase_ml_custom_model_downloader: ^14.4.0 # Tải mô hình tùy chỉnh
+  # firebase_ml_custom_model_interpreter: ^14.4.0 # Giải thích mô hình tùy chỉnh
+  # firebase_ml_custom_model_interpreter_downloader: ^14.4.0 # Tải mô hình tùy chỉnh
+  # firebase_ml_custom_model_interpreter_updater: ^14.4.0 # Cập nhật mô hình tùy chỉnh
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
