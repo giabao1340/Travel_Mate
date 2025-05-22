@@ -1,11 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:travel_mate/popular_item.dart';
 
 class PlaceDetailsScreen extends StatefulWidget {
   const PlaceDetailsScreen({super.key});
 
   @override
   State<PlaceDetailsScreen> createState() => _PlaceDetailsScreenState();
+}
+
+class LocationItem {
+  final String image;
+  final String title;
+  final String location;
+  final double rating;
+  final int reviews;
+
+  const LocationItem({
+    required this.image,
+    required this.title,
+    required this.location,
+    required this.rating,
+    required this.reviews,
+  });
+}
+
+// ✨ Class quản lý sự kiện
+class Event {
+  final String name;
+  bool isSubscribed;
+
+  Event({required this.name, this.isSubscribed = false});
 }
 
 class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
@@ -21,10 +46,56 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
     'assets/city3.jpg',
   ];
 
-  final List<String> events = [
-    "Lễ hội Hoa Đà Lạt - 20/12/2025",
-    "Chợ đêm Đà Lạt - Mỗi tối",
-    "Tour khám phá Thác Datanla - Hàng ngày",
+  final List<LocationItem> locationItems = [
+    LocationItem(
+      image: 'assets/city1.jpg',
+      title: 'City 1',
+      location: 'Location 1',
+      rating: 4.5,
+      reviews: 100,
+    ),
+    LocationItem(
+      image: 'assets/city2.jpg',
+      title: 'City 2',
+      location: 'Location 2',
+      rating: 4.0,
+      reviews: 80,
+    ),
+    LocationItem(
+      image: 'assets/city3.jpg',
+      title: 'City 3',
+      location: 'Location 3',
+      rating: 4.8,
+      reviews: 120,
+    ),
+    LocationItem(
+      image: 'assets/city4.jpg',
+      title: 'City 4',
+      location: 'Location 4',
+      rating: 4.2,
+      reviews: 90,
+    ),
+    LocationItem(
+      image: 'assets/city5.jpg',
+      title: 'City 5',
+      location: 'Location 5',
+      rating: 4.7,
+      reviews: 110,
+    ),
+    LocationItem(
+      image: 'assets/city6.jpg',
+      title: 'City 6',
+      location: 'Location 6',
+      rating: 4.3,
+      reviews: 95,
+    ),
+  ];
+
+  // ✅ Danh sách sự kiện có thể bật/tắt thông báo riêng
+  final List<Event> events = [
+    Event(name: "Lễ hội Hoa Đà Lạt - 20/12/2025"),
+    Event(name: "Chợ đêm Đà Lạt - Mỗi tối"),
+    Event(name: "Tour khám phá Thác Datanla - Hàng ngày"),
   ];
 
   final List<Map<String, dynamic>> reviews = [
@@ -48,7 +119,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
         backgroundColor: const Color(0xFF9093CD),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.only(bottom: 20),
+        padding: const EdgeInsets.only(bottom: 20, top: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -143,7 +214,8 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
               ),
             ),
             const SizedBox(height: 10),
-            ...events.map((event) {
+            ...events.asMap().entries.map((entry) {
+              Event event = entry.value;
               return Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16,
@@ -155,22 +227,26 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                   ),
                   child: ListTile(
                     leading: const Icon(Icons.event, color: Colors.blueAccent),
-                    title: Text(event),
+                    title: Text(event.name),
                     trailing: IconButton(
-                      icon: const Icon(
-                        Icons.notifications_active,
-                        color: Colors.orange,
-                      ),
                       onPressed: () {
-                        // Nhận thông báo
+                        setState(() {
+                          event.isSubscribed = !event.isSubscribed;
+                        });
                       },
+                      icon: Icon(
+                        event.isSubscribed
+                            ? Icons.notifications_active
+                            : Icons.notifications_none_outlined,
+                        color: Colors.deepPurple,
+                      ),
                     ),
                   ),
                 ),
               );
             }),
-            const SizedBox(height: 25),
 
+            const SizedBox(height: 25),
             // Đánh giá
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -214,7 +290,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
               );
             }),
 
-            // Form viết đánh giá
+            // Viết đánh giá
             const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -240,9 +316,7 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
                   ),
                   const SizedBox(height: 10),
                   ElevatedButton(
-                    onPressed: () {
-                      // Gửi đánh giá
-                    },
+                    onPressed: () {},
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.deepPurple,
                       foregroundColor: Colors.white,
@@ -257,6 +331,26 @@ class _PlaceDetailsScreenState extends State<PlaceDetailsScreen> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildTabContent(String title) {
+    return SizedBox(
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: List.generate(6, (index) {
+            return PopularItem(
+              image: locationItems[index].image,
+              title: locationItems[index].title,
+              location: locationItems[index].location,
+              rating: locationItems[index].rating,
+              reviews: locationItems[index].reviews,
+            );
+          }),
         ),
       ),
     );

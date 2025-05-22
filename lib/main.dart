@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:travel_mate/header_widget.dart';
 import 'package:travel_mate/introscreen.dart';
 import 'package:travel_mate/lists_creen.dart';
+import 'package:travel_mate/place_details_screen.dart';
 import 'package:travel_mate/profile_screen.dart';
 import 'package:travel_mate/search_screen.dart';
 import 'auth/login_screen.dart';
@@ -11,10 +13,15 @@ import 'auth/register_screen.dart';
 import 'auth/forgot_password_screen.dart';
 import 'auth/otp_verification_screen.dart';
 import 'auth/reset_password_screen.dart';
-
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
-void main() => runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final app = await Firebase.initializeApp();
+  print("Firebase connected: ${app.name}");
+  runApp(MyApp());
+}
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -56,6 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
     HomeContentScreen(),
     ListScreen(),
     ProfileScreen(),
+    PlaceDetailsScreen(),
   ];
 
   final String userName = 'Gia Bảo';
