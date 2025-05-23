@@ -15,9 +15,10 @@ dependencies:
   google_fonts: ^6.2.1 # Use the latest version
   dynamic_tabbar: ^1.0.9
   carousel_slider: ^5.0.0
-
   firebase_core: ^3.13.1
-  firebase_auth: ^5.5.4         # Xác thực người dùng
+  firebase_auth: ^5.5.4        # Xác thực người dùng
+  google_sign_in: ^6.3.0
+
   cloud_firestore: ^5.6.8       # Dữ liệu NoSQL
   firebase_storage: ^12.4.6      # Lưu file ảnh,...
   firebase_messaging: ^15.2.6    # Thông báo
