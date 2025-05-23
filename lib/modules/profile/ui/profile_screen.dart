@@ -1,7 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:travel_mate/modules/auth/controller/auth_controller.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  final AuthController _authController = AuthController();
+
+  void _handleSignOut() async {
+    await _authController.signOut();
+
+    if (!mounted) return;
+    Navigator.pushReplacementNamed(context, '/introscreen');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +140,7 @@ class ProfileScreen extends StatelessWidget {
                     icon: Icons.logout,
                     title: 'Đăng xuất',
                     onTap: () {
-                      // Thêm logic khi nhấn vào
+                      _handleSignOut();
                     },
                   ),
                 ],

@@ -1,5 +1,6 @@
 // lib/main.dart
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:travel_mate/config/app_routes.dart';
@@ -29,8 +30,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Travel Mate',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const IntroScreen(),
+      home: FirebaseAuth.instance.currentUser != null
+          ? const HomeScreen()
+          : const IntroScreen(), // 👈 kiểm tra trạng thái,
       routes: appRoutes,
+      
     );
   }
 }
