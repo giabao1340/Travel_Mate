@@ -1,27 +1,24 @@
+// lib/main.dart
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:travel_mate/header_widget.dart';
-import 'package:travel_mate/introscreen.dart';
-import 'package:travel_mate/lists_creen.dart';
-import 'package:travel_mate/place_details_screen.dart';
-import 'package:travel_mate/profile_screen.dart';
-import 'package:travel_mate/search_screen.dart';
-import 'auth/login_screen.dart';
-import 'home_content_screen.dart';
-import 'favorite_screen.dart';
-import 'auth/register_screen.dart';
-import 'auth/forgot_password_screen.dart';
-import 'auth/otp_verification_screen.dart';
-import 'auth/reset_password_screen.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:travel_mate/config/app_routes.dart';
+import 'package:travel_mate/core/widgets/header_widget.dart';
+import 'package:travel_mate/modules/home/screens/favorite_screen.dart';
+import 'package:travel_mate/modules/home/screens/home_content_screen.dart';
+import 'package:travel_mate/modules/home/screens/lists_creen.dart';
+import 'package:travel_mate/modules/home/screens/place_details_screen.dart';
+import 'package:travel_mate/modules/intro/screens/introscreen.dart';
+import 'package:travel_mate/modules/profile/ui/profile_screen.dart';
+import 'package:travel_mate/modules/search/screens/search_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final app = await Firebase.initializeApp();
+  // ignore: avoid_print
   print("Firebase connected: ${app.name}");
-  runApp(MyApp());
+  runApp(const MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -33,16 +30,7 @@ class MyApp extends StatelessWidget {
       title: 'Travel Mate',
       theme: ThemeData(primarySwatch: Colors.blue),
       home: const IntroScreen(),
-      routes: {
-        '/login': (context) => const LoginScreen(),
-        '/home': (context) => const HomeScreen(),
-        '/register': (context) => const RegisterScreen(),
-        '/forgotpassword': (context) => const ForgotPasswordScreen(),
-        '/otpverification': (context) => const OtpVerificationScreen(),
-        '/resetpassword': (context) => const ResetPasswordScreen(),
-        '/favoritescreen': (context) => const FavoriteScreen(),
-        '/introscreen': (context) => const IntroScreen(),
-      },
+      routes: appRoutes,
     );
   }
 }
